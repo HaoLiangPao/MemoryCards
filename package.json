@@ -1,0 +1,27 @@
+{
+  "name": "MemoryCards",
+  "version": "1.0.0",
+  "description": "A customized memory cards web application which helps people to remember things with a feeling similar to physical memory cards. But it is way more powerful!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaoLiangPao/MemoryCards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaoLiangPao/MemoryCards/issues"
+  },
+  "homepage": "https://github.com/HaoLiangPao/MemoryCards#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "morgan": "^1.10.0"
+  }
+}
