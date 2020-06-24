@@ -4,7 +4,9 @@
   "description": "A customized memory cards web application which helps people to remember things with a feeling similar to physical memory cards. But it is way more powerful!!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
