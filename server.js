@@ -1,25 +1,25 @@
 // ------ Dependencies Installation ------
-// Third-party Package
+// --- Third-party Package
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 
-// Customized Module
+// --- Customized Module
 const connectDB = require("./config/db");
 const errorHandler = require("./middlewares/errorHandler");
+// router
+const collections = require("./routes/memoCollections");
 
-// Load Environment Variables
+// --- Load Environment Variables
 dotenv.config({ path: "./config/config.env" });
 
-// Initiate the application
+// --- Initiate the application
 const app = express();
 // Initialize the mongoDB connection
 connectDB();
 
 // Define the routes
-app.use("/", (req, res, next) => {
-  res.status(200).json({ success: true, message: "hitting the root route" });
-});
+app.use("/api/v1/collections", collections);
 
 // Catch errors
 app.use(errorHandler);
