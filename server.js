@@ -6,6 +6,7 @@ const colors = require("colors");
 
 // Customized Module
 const connectDB = require("./config/db");
+const errorHandler = require("./middlewares/errorHandler");
 
 // Load Environment Variables
 dotenv.config({ path: "./config/config.env" });
@@ -14,6 +15,14 @@ dotenv.config({ path: "./config/config.env" });
 const app = express();
 // Initialize the mongoDB connection
 connectDB();
+
+// Define the routes
+app.use("/", (req, res, next) => {
+  res.status(200).json({ success: true, message: "hitting the root route" });
+});
+
+// Catch errors
+app.use(errorHandler);
 
 // Set & Listen to the port
 const port = process.env.PORT || 5000;
