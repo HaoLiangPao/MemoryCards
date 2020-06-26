@@ -15,21 +15,22 @@ const conn = mongoose.connect(process.env.MONGO_URI, {
 });
 
 // Load models in mongoDB
-const MemoCollection = require("./models/MemoCollection.js");
+const MemoCollection = require("./models/MemoCollection");
+const User = require("./models/User");
 
 // Get seeder data
 const memoryCollections = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/collections.json`)
 );
-// const users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`));
 
 // Import data into database
 const importData = async () => {
   try {
     await MemoCollection.create(memoryCollections);
     console.log("MemoryCard Collection data imported...".green.inverse);
-    // await User.create(users);
-    // console.log("User data imported...".green.inverse);
+    await User.create(users);
+    console.log("User data imported...".green.inverse);
     process.exit();
   } catch (error) {
     console.log(error);
@@ -41,6 +42,8 @@ const deleteData = async () => {
   try {
     await MemoCollection.deleteMany();
     console.log("MemoryCard Collection data deleted".red.inverse);
+    await User.deleteMany();
+    console.log("User data deleted".red.inverse);
     process.exit();
   } catch (error) {
     console.log(error);
