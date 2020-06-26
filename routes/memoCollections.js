@@ -8,8 +8,15 @@ const {
   deleteCollection,
 } = require("../controllers/memoCollections");
 
+// Include other resource routers
+const cardRouter = require("./memoCards");
+
 // Initialize the router
 const router = express.Router();
+
+// Routes handling
+// Re-route into other resource routers
+router.use("/:collectionId/memorycards", cardRouter);
 
 // Define the routes
 router.route("/").get(getCollections).post(createCollection);

@@ -11,6 +11,7 @@ const errorHandler = require("./middlewares/errorHandler");
 // router
 const collections = require("./routes/memoCollections");
 const users = require("./routes/users");
+const cards = require("./routes/memoCards");
 
 // --- Load Environment Variables
 dotenv.config({ path: "./config/config.env" });
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === "development") {
 // Define the routes
 app.use("/api/v1/collections", collections);
 app.use("/api/v1/users", users);
+app.use("/api/v1/memorycards", cards);
 
 // Catch errors
 app.use(errorHandler);
