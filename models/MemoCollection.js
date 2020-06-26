@@ -8,12 +8,17 @@ const MemoCollectionSchema = new mongoose.Schema({
     trim: true,
     maxlength: [50, "Name can not be more than 50 characters"],
   },
-  priority: {
-    type: Number,
-    required: [true, "Please add a priority"],
-    min: [1, "Priority must be at least 1"],
-    max: [10, "Priority must be at most 10"],
+  description: {
+    type: String,
+    required: [true, "Please add a description"],
+    maxlength: [500, "Description can not be more than 500 characters"],
   },
+  // priority: {
+  //   type: Number,
+  //   required: [true, "Please add a priority"],
+  //   min: [1, "Priority must be at least 1"],
+  //   max: [10, "Priority must be at most 10"],
+  // },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
@@ -22,7 +27,6 @@ const MemoCollectionSchema = new mongoose.Schema({
   memoCards: {
     type: mongoose.Schema.ObjectId,
     ref: "MemoCard",
-    required: true,
   },
   createdAt: {
     type: Date,

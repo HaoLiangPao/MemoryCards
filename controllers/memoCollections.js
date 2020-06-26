@@ -19,20 +19,58 @@ exports.createCollection = AsyncHandler(async (req, res, next) => {
   // Check if the user is logged in
 
   // Create a memroy card collection based on the information passed within the url body
-
-  res.status(200).json({ success: true, message: "Create a collection" }); // could get results send by this middleware function in this way
+  const collection = await MemoCollection.create(req.body);
+  res.status(201).json({
+    success: true,
+    message: `Collection(id:${collection.id}) is created`, // _id and id both works
+    data: collection,
+  }); // could get results send by this middleware function in this way
 });
 
 // @desc        Update a collection
 // @route       PUT /api/v1/collections/:id
 // @access      Private
 exports.updateCollection = AsyncHandler(async (req, res, next) => {
-  res.status(200).json({ success: true, message: "Update a collection" }); // could get results send by this middleware function in this way
+  // Check if the collection exist
+  const exist = await MemoCollection.findById(req.params.id);
+  if (!exist) {
+    return new ErrorResponse(
+      `No collection found with id of ${req.params.id}`,
+      404
+    );
+  }
+  const collection = await MemoCollection.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidator: true,
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+    message: `Collection(id:${req.params.id}) is updated`,
+    data: collection,
+  });
 });
 
 // @desc        Delete a collection
 // @route       GET /api/v1/collections:/id
 // @access      Private
 exports.deleteCollection = AsyncHandler(async (req, res, next) => {
-  res.status(200).json({ success: true, message: "Delete a collection" }); // could get results send by this middleware function in this way
+  // Check if the collection exist
+  const collection = await MemoCollection.findById(req.params.id);
+  if (!collection) {
+    return next(
+      new ErrorResponse(`No collection found with id of ${req.params.id}`, 404)
+    );
+  }
+  await collection.remove();
+
+  res.status(200).json({
+    success: true,
+    message: `Collection(id:${req.params.id}) deleted`,
+    data: {},
+  });
 });
