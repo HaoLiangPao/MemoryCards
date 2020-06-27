@@ -24,7 +24,10 @@ router.use("/:collectionId/memorycards", cardRouter);
 // Define the routes
 router.route("/").get(getCollections).post(protect, createCollection);
 
-router.route("/:id").put(updateCollection).delete(deleteCollection);
+router
+  .route("/:id")
+  .put(protect, updateCollection)
+  .delete(protect, deleteCollection);
 
 // Export the router
 module.exports = router;
