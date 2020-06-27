@@ -14,12 +14,15 @@ const cardRouter = require("./memoCards");
 // Initialize the router
 const router = express.Router();
 
+// --- Middleware functions ---
+const { protect } = require("../middlewares/auth");
+
 // Routes handling
 // Re-route into other resource routers
 router.use("/:collectionId/memorycards", cardRouter);
 
 // Define the routes
-router.route("/").get(getCollections).post(createCollection);
+router.route("/").get(getCollections).post(protect, createCollection);
 
 router.route("/:id").put(updateCollection).delete(deleteCollection);
 
