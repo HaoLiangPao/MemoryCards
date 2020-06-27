@@ -13,7 +13,7 @@ const {
 const router = express.Router({ mergeParams: true }); // merge url params from collections
 
 // --- Middleware Functions ---
-const { protect, authorize } = require("../middlewares/auth");
+const { protect } = require("../middlewares/auth");
 
 // Connect routes with endpoint methods
 router.route("/").get(getMemoCards).post(protect, createMemoCard);
