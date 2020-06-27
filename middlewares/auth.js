@@ -16,6 +16,10 @@ exports.protect = AsyncHandler(async (req, res, next) => {
     // Format: Bearer <token>
     token = req.headers.authorization.split(" ")[1];
   }
+  // else if(req.cookies.MemoryToken) {
+  //   token = req.cookies.MemoryToken
+  // }
+
   // If the token is not passed in or it is in an invalid format
   if (!token) {
     return next(new ErrorResponse("Not authorized to access this route", 403));
