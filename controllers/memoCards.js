@@ -88,8 +88,6 @@ exports.getMemoCard = AsyncHandler(async (req, res, next) => {
 // @route         POST /api/v1/collections/:collectionId/memorycards
 // @access        Private
 exports.createMemoCard = AsyncHandler(async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.params);
   // Check authentification of the card
 
   // Add collection to the body for creation

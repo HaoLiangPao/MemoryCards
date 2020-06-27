@@ -33,10 +33,10 @@ exports.createCollection = AsyncHandler(async (req, res, next) => {
 exports.updateCollection = AsyncHandler(async (req, res, next) => {
   // Check if the collection exist
   const exist = await MemoCollection.findById(req.params.id);
+
   if (!exist) {
-    return new ErrorResponse(
-      `No collection found with id of ${req.params.id}`,
-      404
+    return next(
+      new ErrorResponse(`No collection found with id of ${req.params.id}`, 404)
     );
   }
   const collection = await MemoCollection.findByIdAndUpdate(
